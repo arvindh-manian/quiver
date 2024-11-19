@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 cache_times = dict()
 
 
-def request_file_from_server(filename, server="http://104.198.236.232:8080/hls"):
+def request_file_from_server(filename, server="http://ingestion-server:8080/hls"):
     logging.debug(f"Requesting {filename} from origin server")
     try:
         response = requests.get(f'{server}/{filename}')
