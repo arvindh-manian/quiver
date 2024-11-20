@@ -1,9 +1,6 @@
 services:
-
   edge:
-    # build: 
-    #   context: ./edge
-    build: arvindhmanian/quiver-edge:latest
+    image: arvindhmanian/quiver-edge:latest
     ports:
       - "8080:8080"
     depends_on:
@@ -11,16 +8,16 @@ services:
     container_name: edge-server
     networks:
       - quiver-net
+    restart: unless-stopped
 
   ingest:
-    build: arvindhmanian/quiver-ingest:latest
-    # build: 
-    #   context: ./ingestion
+    image: arvindhmanian/quiver-ingest:latest
     ports:
       - "1935:1935"
     container_name: ingestion-server
     networks:
       - quiver-net
+    restart: unless-stopped
 
 networks:
   quiver-net:
