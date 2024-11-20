@@ -1,0 +1,27 @@
+services:
+
+  edge:
+    # build: 
+    #   context: ./edge
+    build: arvindhmanian/quiver-edge:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - ingest
+    container_name: edge-server
+    networks:
+      - quiver-net
+
+  ingest:
+    build: arvindhmanian/quiver-ingest:latest
+    # build: 
+    #   context: ./ingestion
+    ports:
+      - "1935:1935"
+    container_name: ingestion-server
+    networks:
+      - quiver-net
+
+networks:
+  quiver-net:
+    driver: bridge
