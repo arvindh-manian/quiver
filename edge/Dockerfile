@@ -8,6 +8,7 @@ EXPOSE 8080
 
 ENV FLASK_APP=edge_server.py
 ENV FLASK_RUN_PORT=8080
+# ENV PYTHONUNBUFFERED=1
 
 COPY requirements.txt requirements.txt
 
