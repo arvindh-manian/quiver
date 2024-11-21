@@ -9,7 +9,7 @@ import os
 cache_times = dict()
 
 
-def request_file_from_server(app, filename, server=f"http://{os.environ['ingestion-pull_SERVICE_HOST']}:{os.environ['ingestion-pull_SERVICE_PORT']}/streams/hls"):
+def request_file_from_server(app, filename, server=f"http://{os.environ['INGESTION_PULL_SERVICE_HOST']}:{os.environ['INGESTION_PULL_SERVICE_PORT']}/streams/hls"):
     try:
         response = requests.get(f'{server}/{filename}')
         response.raise_for_status()
