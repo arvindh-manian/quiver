@@ -14,6 +14,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
       - name: Log in to DockerHub
         uses: docker/login-action@v2
         with:
@@ -21,21 +24,24 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Edge Docker Image
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/quiver-edge:latest ./edge
-
-      - name: Push Edge Docker Image
-        run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/quiver-edge:latest
-
+        uses: docker/build-push-action@v4
+        with:
+          context: ./edge
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/quiver-edge:latest
+            ${{ secrets.DOCKER_USERNAME }}/quiver-edge:${{ github.sha }}
+            
   build-and-push-ingestion:
     name: Build and Push Ingestion Docker Image
     runs-on: ubuntu-latest
-    needs: build-and-push-edge
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
 
       - name: Log in to DockerHub
         uses: docker/login-action@v2
@@ -43,10 +49,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Ingestion Docker Image
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/quiver-ingestion:latest ./ingestion
-
-      - name: Push Ingestion Docker Image
-        run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/quiver-ingestion:latest
+      - name: Build and Push Quiver Ingestion Image
+        uses: docker/build-push-action@v4
+        with:
+          context: ./ingestion
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/quiver-ingestion:latest
+            ${{ secrets.DOCKER_USERNAME }}/quiver-ingestion:${{ github.sha }}
