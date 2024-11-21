@@ -31,6 +31,9 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/quiver-edge:latest
             ${{ secrets.DOCKER_USERNAME }}/quiver-edge:${{ github.sha }}
+      
+      - name: Push Edge Docker Image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/quiver-edge:latest && docker push ${{ secrets.DOCKER_USERNAME }}/quiver-edge:${{ github.sha }}
             
   build-and-push-ingestion:
     name: Build and Push Ingestion Docker Image
@@ -57,3 +60,6 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/quiver-ingestion:latest
             ${{ secrets.DOCKER_USERNAME }}/quiver-ingestion:${{ github.sha }}
+      
+      - name: Push Ingestion Docker Image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/quiver-ingestion:latest && docker push ${{ secrets.DOCKER_USERNAME }}/quiver-ingestion:${{ github.sha }}
