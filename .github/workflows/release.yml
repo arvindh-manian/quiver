@@ -1,9 +1,9 @@
-name: Test if Docker Image Builds
+name: Push Docker Images
 
 on:
-  push:
-    branches:
-      - main
+  release:
+    types:
+      - published
 
 jobs:
   build-and-push-edge:
@@ -28,6 +28,10 @@ jobs:
         with:
           context: ./edge
           platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/quiver-edge:latest
+            ${{ secrets.DOCKER_USERNAME }}/quiver-edge:${{ github.event.release.tag_name }}
        
   build-and-push-ingestion:
     name: Build and Push Ingestion Docker Image
@@ -51,3 +55,7 @@ jobs:
         with:
           context: ./ingestion
           platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            ${{ secrets.DOCKER_USERNAME }}/quiver-ingestion:latest
+            ${{ secrets.DOCKER_USERNAME }}/quiver-ingestion:${{ github.event.release.tag_name }}
