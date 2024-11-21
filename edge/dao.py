@@ -3,12 +3,13 @@ import os
 import requests
 from datetime import datetime, timedelta
 import logging
+import os
 
 # stores stringnames of files that have been cached
 cache_times = dict()
 
 
-def request_file_from_server(app, filename, server="http://ingestion-server:8080/streams/hls"):
+def request_file_from_server(app, filename, server=f"http://{os.environ['ingestion-pull_SERVICE_HOST']}:{os.environ['ingestion-pull_SERVICE_PORT']}/streams/hls"):
     try:
         response = requests.get(f'{server}/{filename}')
         response.raise_for_status()

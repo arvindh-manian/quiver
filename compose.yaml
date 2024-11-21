@@ -11,7 +11,7 @@ services:
     restart: unless-stopped
 
   ingest:
-    image: arvindhmanian/quiver-ingest:latest
+    image: arvindhmanian/quiver-ingestion:latest
     ports:
       - "1935:1935"
     container_name: ingestion-server

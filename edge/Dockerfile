@@ -8,7 +8,8 @@ EXPOSE 8080
 
 ENV FLASK_APP=edge_server.py
 ENV FLASK_RUN_PORT=8080
-# ENV PYTHONUNBUFFERED=1
+ENV ingestion-pull_SERVICE_HOST=ingestion-server
+ENV ingestion-pull_SERVICE_PORT=8080
 
 COPY requirements.txt requirements.txt
 
