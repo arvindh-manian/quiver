@@ -19,6 +19,10 @@ if not os.path.exists('/app/cache'):
 #                     filemode='w+')
 
 
+@app.route("/")
+def index():
+    return jsonify({"message": "Hello, World!"})
+
 @app.route("/healthz")
 def healthz():
     return jsonify({"status": "healthy"})
