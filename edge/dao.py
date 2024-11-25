@@ -3,7 +3,9 @@ import os
 import requests
 import logging
 from diskcache import Cache
-
+from prometheus_client import Counter
+cache_hits = Counter('cache_hits', 'Number of cache hits')
+cache_misses = Counter('cache_misses', 'Number of cache misses')
 cache = Cache('/app/cache')
 
 def request_file_from_server(app, filename, server=f"http://{os.environ['INGESTION_PULL_SERVICE_HOST']}:{os.environ['INGESTION_PULL_SERVICE_PORT']}/streams/hls"):
@@ -31,6 +33,8 @@ def fetch_file(app, filename):
     file_path = f'/app/cache/{filename}'
     if not cache.get(filename):
         request_file_from_server(app, filename)
+        cache_misses.inc()
     else:
+        cache_hits.inc()
         logging.debug(f"Fetching {filename} from cache")
     return send_file(file_path)
