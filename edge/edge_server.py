@@ -5,9 +5,11 @@ import logging
 import os
 
 from flask_cors import CORS
+from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
 CORS(app)
+metric = PrometheusMetrics(app)
 app.logger.setLevel(logging.INFO)
 
 if not os.path.exists('/app/cache'):
