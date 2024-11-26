@@ -1,18 +1,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    autopilot.gke.io/resource-adjustment: '{"input":{"containers":[{"name":"quiver-edge"}]},"output":{"containers":[{"limits":{"ephemeral-storage":"1Gi"},"requests":{"cpu":"500m","ephemeral-storage":"1Gi","memory":"2Gi"},"name":"quiver-edge"}]},"modified":true}'
-    autopilot.gke.io/warden-version: 3.0.41
-    deployment.kubernetes.io/revision: "7"
-  creationTimestamp: "2024-11-21T06:29:35Z"
   generation: 8
   labels:
     app: edge
   name: edge
   namespace: default
-  resourceVersion: "6560656"
-  uid: 05422a05-51e3-4ae3-a471-52d59e9770e6
 spec:
   progressDeadlineSeconds: 600
   replicas: 3
@@ -60,22 +53,3 @@ spec:
         key: kubernetes.io/arch
         operator: Equal
         value: amd64
-status:
-  availableReplicas: 3
-  conditions:
-  - lastTransitionTime: "2024-11-25T21:28:12Z"
-    lastUpdateTime: "2024-11-25T21:28:12Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  - lastTransitionTime: "2024-11-21T06:29:35Z"
-    lastUpdateTime: "2024-11-26T03:27:17Z"
-    message: ReplicaSet "edge-754c988bd6" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  observedGeneration: 8
-  readyReplicas: 3
-  replicas: 3
-  updatedReplicas: 3

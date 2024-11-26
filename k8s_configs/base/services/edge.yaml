@@ -1,17 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    cloud.google.com/neg: '{"ingress":true}'
-  creationTimestamp: "2024-11-21T06:32:59Z"
   finalizers:
   - service.kubernetes.io/load-balancer-cleanup
   labels:
     app: edge
   name: edge
   namespace: default
-  resourceVersion: "6224898"
-  uid: 8596bc3e-6f0a-4673-907e-fe3b3c44a2c0
 spec:
   allocateLoadBalancerNodePorts: true
   clusterIP: 34.118.238.75
