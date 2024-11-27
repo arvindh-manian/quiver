@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: ingestion-external
+  name: ingestion-external
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ingestion-external
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ingestion-external
+    spec:
+      containers:
+      - image: arvindhmanian/quiver-ingestion-external:1.0.0
+        name: quiver-ingestion-external
+        resources:
+          limits:
+            ephemeral-storage: 1Gi
+          requests:
+            cpu: 500m
+            ephemeral-storage: 512Mi
+            memory: 1Gi
