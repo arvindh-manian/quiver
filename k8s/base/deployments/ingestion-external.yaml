@@ -18,7 +18,7 @@ spec:
         app: ingestion-external
     spec:
       containers:
-      - image: arvindhmanian/quiver-ingestion-external:1.0.0
+      - image: arvindhmanian/quiver-ingestion-external:1.1.1
         name: quiver-ingestion-external
         resources:
           limits:

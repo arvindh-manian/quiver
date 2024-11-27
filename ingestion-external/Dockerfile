@@ -11,6 +11,4 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 1935
 
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD curl -f http://localhost:8080/healthz || exit 1
-
 CMD ["nginx", "-g", "daemon off;"]
