@@ -1,4 +1,4 @@
-![builds](https://github.com/github/docs/actions/workflows/docker-image.yml/badge.svg)
+[![Test if Docker Image Builds](https://github.com/arvindh-manian/quiver/actions/workflows/docker-image.yml/badge.svg)](https://github.com/arvindh-manian/quiver/actions/workflows/docker-image.yml)
 
 # Quiver
 
